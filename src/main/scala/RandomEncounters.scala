@@ -1,7 +1,7 @@
 import java.sql.{Connection, DriverManager}
 import scala.io.StdIn.readLine
 
-object RandomEncounters extends App {
+object RandomEncounters {
   //CONNECTION TO MYSQL
 // connect to the database on localhost
   val url = "jdbc:mysql://localhost:3306/projectzero"
@@ -33,16 +33,14 @@ object RandomEncounters extends App {
       "Welcome to Random Encounters!"
     )
     // Create Character
-
+    var createName: String = ""
     //check name is unique
     var flag: Boolean = true
     while (flag) {
       //USER INPUT: Name: -> users (username + userID)
-      val createName: String = readLine("Name: ")
-
-      nameIsUnique(connection, createName) match {
-        // name is unique
-        case true => flag = false
+      createName = readLine("Name: ")
+      if (nameIsUnique(connection, createName)) {
+        flag = false
       }
 
     }
@@ -70,7 +68,7 @@ object RandomEncounters extends App {
 // End
     // would you like to play again
     //quit
-    connection.close()
+    //connection.close()
   }
 //global functions
 
